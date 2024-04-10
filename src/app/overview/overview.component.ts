@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { HOTELS } from '../mock-hotels';
+import { Component, OnInit } from '@angular/core';
 import { HotelComponent } from '../hotel/hotel.component';
+import { HotelsService } from '../services/hotels.service';
+import { Hotel } from '../models';
 
 @Component({
   selector: 'app-overview',
@@ -11,6 +12,20 @@ import { HotelComponent } from '../hotel/hotel.component';
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
 })
-export class OverviewComponent {
-  hotels = HOTELS;
+export class OverviewComponent implements OnInit {
+  hotels: Hotel[] = [];
+
+  constructor(private hotelsService: HotelsService) {
+  }
+
+  ngOnInit(): void {
+    this.getHotels();
+  }
+
+  getHotels() {
+    this.hotelsService.getHotels()
+      .subscribe(hotels => {
+        this.hotels = hotels;
+      });
+  }
 }
