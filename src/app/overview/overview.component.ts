@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
 import { HOTELS } from '../mock-hotels';
+import { HotelComponent } from '../hotel/hotel.component';
 
 @Component({
   selector: 'app-overview',
   standalone: true,
   imports: [
-    UpperCasePipe,
+    HotelComponent,
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',

@@ -1,6 +1,3 @@
 @for (hotel of hotels; track hotel.id) {
-  <h2>{{ hotel.name | uppercase }} Details</h2>
-  <div><span>id: </span> {{ hotel.id }}</div>
-  <div><span>name: </span> {{ hotel.name }}</div>
-  <div><span>location: </span> {{ hotel.location }}</div>
+  <app-hotel [hotel]="hotel"/>
 }
