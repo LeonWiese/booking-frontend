@@ -4,6 +4,7 @@ import { Hotel, HotelWithoutId } from '../models';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ListItemComponent } from './list-item/list-item.component';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-overview',
@@ -30,7 +31,10 @@ export class OverviewComponent implements OnInit {
 
   showAddHotelForm = false;
 
-  constructor(private hotelsService: HotelsService) {
+  constructor(
+    private hotelsService: HotelsService,
+    protected keycloak: KeycloakService,
+  ) {
   }
 
   ngOnInit(): void {

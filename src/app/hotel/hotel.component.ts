@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from '../models';
-import { UpperCasePipe } from '@angular/common';
+import { Location, UpperCasePipe } from '@angular/common';
 import { HotelsService } from '../services/hotels.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,6 +18,7 @@ export class HotelComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private location: Location,
     private hotelService: HotelsService,
   ) {
   }
@@ -34,6 +35,10 @@ export class HotelComponent implements OnInit {
       .subscribe(hotel => {
         this.hotel = hotel;
       });
+  }
+
+  back() {
+    this.location.back();
   }
 }
 
