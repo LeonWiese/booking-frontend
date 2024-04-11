@@ -1,4 +1,10 @@
 <h1>Booking Website</h1>
-<nav></nav>
+<nav>
+  @if (keycloak.isLoggedIn()) {
+    <a (click)="logout()">Logout</a>
+  } @else {
+    <a (click)="login()">Login</a>
+  }
+</nav>
 
 <router-outlet/>
