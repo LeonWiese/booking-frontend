@@ -17,7 +17,7 @@
       }
     </div>
     <div>
-      <button type="submit" [disabled]="!addHotelForm.valid">Save</button>
+      <button type="submit" [disabled]="addHotelForm.invalid">Save</button>
       <button (click)="showAddHotelForm = false">Cancel</button>
     </div>
   </form>

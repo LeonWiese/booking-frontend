@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelsService } from '../services/hotels.service';
-import { Hotel } from '../models';
+import { Hotel, HotelWithoutId } from '../models';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -19,10 +19,10 @@ export class OverviewComponent implements OnInit {
 
   addHotelForm = new FormGroup({
     name: new FormControl('', [
-      Validators.required
+      Validators.required,
     ]),
     location: new FormControl('', [
-      Validators.required
+      Validators.required,
     ]),
   });
 
@@ -43,7 +43,23 @@ export class OverviewComponent implements OnInit {
   }
 
   saveHotel() {
-    const newHotel = this.addHotelForm.value;
-    console.log('newHotel:', newHotel);
+    const newHotel: HotelWithoutId = {
+      name: this.addHotelForm.value.name ?? '',
+      location: this.addHotelForm.value.location ?? '',
+    };
+    this.hotelsService.addHotel(newHotel)
+      .subscribe(() => {
+        this.addHotelForm.reset();
+        this.getHotels();
+      });
   }
 }
+
+
+
+
+
+
+
+
+

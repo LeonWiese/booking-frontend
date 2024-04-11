@@ -3,3 +3,5 @@ export type Hotel = {
   name: string;
   location: string;
 }
+
+export type HotelWithoutId = Omit<Hotel, 'id'>;

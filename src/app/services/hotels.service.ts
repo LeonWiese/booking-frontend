@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hotel } from '../models';
+import { Hotel, HotelWithoutId } from '../models';
 import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,10 @@ export class HotelsService {
       .pipe(
         catchError(this.handleError('getHotel', undefined)),
       );
+  }
+
+  addHotel(hotel: HotelWithoutId): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/hotels`, hotel);
   }
 
   private handleError<T>(operation: string, result: T) {
