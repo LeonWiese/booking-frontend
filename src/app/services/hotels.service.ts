@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models';
-import { HOTELS } from '../mock-hotels';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelsService {
+  private apiUrl = environment.apiUrl;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getHotels(): Observable<Hotel[]> {
-    return of(HOTELS);
+    return this.http.get<Hotel[]>(`${this.apiUrl}/hotels`);
   }
 }
