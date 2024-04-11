@@ -1,3 +1,10 @@
-@for (hotel of hotels; track hotel.id) {
-  <app-hotel [hotel]="hotel"/>
-}
+<ul class="hotels">
+  @for (hotel of hotels; track hotel.id) {
+    <li>
+      <a routerLink="/hotels/{{hotel.id}}">
+        <p class="name">{{ hotel.name }}</p>
+        <p class="location">{{ hotel.location }}</p>
+      </a>
+    </li>
+  }
+</ul>
