@@ -3,6 +3,7 @@ import { HotelsService } from '../services/hotels.service';
 import { Hotel, HotelWithoutId } from '../models';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ListItemComponent } from './list-item/list-item.component';
 
 @Component({
   selector: 'app-overview',
@@ -10,6 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   imports: [
     RouterLink,
     ReactiveFormsModule,
+    ListItemComponent,
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
@@ -50,6 +52,13 @@ export class OverviewComponent implements OnInit {
     this.hotelsService.addHotel(newHotel)
       .subscribe(() => {
         this.addHotelForm.reset();
+        this.getHotels();
+      });
+  }
+
+  deleteHotel(id: string) {
+    this.hotelsService.deleteHotel(id)
+      .subscribe(() => {
         this.getHotels();
       });
   }

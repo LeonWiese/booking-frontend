@@ -28,6 +28,10 @@ export class HotelsService {
     return this.http.post<void>(`${this.apiUrl}/hotels`, hotel);
   }
 
+  deleteHotel(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/hotels/${id}`);
+  }
+
   private handleError<T>(operation: string, result: T) {
     return (error: unknown): Observable<T> => {
       // TODO: send this error to remote logging infrastructure

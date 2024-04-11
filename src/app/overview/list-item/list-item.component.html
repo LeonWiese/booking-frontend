@@ -1,0 +1,9 @@
+@if (hotel) {
+  <li>
+    <a routerLink="/hotels/{{hotel.id}}">
+      <p class="name">{{ hotel.name }}</p>
+      <p class="location">{{ hotel.location }}</p>
+    </a>
+    <button (click)="onDeleteClick()">Delete item</button>
+  </li>
+}

@@ -27,11 +27,6 @@
 
 <ul class="hotels">
   @for (hotel of hotels; track hotel.id) {
-    <li>
-      <a routerLink="/hotels/{{hotel.id}}">
-        <p class="name">{{ hotel.name }}</p>
-        <p class="location">{{ hotel.location }}</p>
-      </a>
-    </li>
+    <app-list-item [hotel]="hotel" (delete)="deleteHotel($event)"/>
   }
 </ul>
