@@ -1,3 +1,30 @@
+@if (showAddHotelForm) {
+  <form [formGroup]="addHotelForm" (submit)="saveHotel()">
+    <div>
+      <label for="name">Name: </label><br/>
+      <input id="name" formControlName="name">
+      @if (addHotelForm.controls.name.touched
+          && addHotelForm.controls.name.invalid) {
+        <div class="error">Name is required</div>
+      }
+    </div>
+    <div>
+      <label for="location">Location: </label><br/>
+      <input id="location" formControlName="location">
+      @if (addHotelForm.controls.location.touched
+          && addHotelForm.controls.location.invalid) {
+        <div class="error">Location is required</div>
+      }
+    </div>
+    <div>
+      <button type="submit" [disabled]="!addHotelForm.valid">Save</button>
+      <button (click)="showAddHotelForm = false">Cancel</button>
+    </div>
+  </form>
+} @else {
+  <button (click)="showAddHotelForm = true">Add hotel</button>
+}
+
 <ul class="hotels">
   @for (hotel of hotels; track hotel.id) {
     <li>
