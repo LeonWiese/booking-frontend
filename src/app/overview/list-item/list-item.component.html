@@ -4,7 +4,7 @@
       <p class="name">{{ hotel.name }}</p>
       <p class="location">{{ hotel.location }}</p>
     </a>
-    @if (keycloak.isUserInRole('create-hotels')) {
+    @if (keycloak.isUserInRole('delete-hotels')) {
       <button (click)="onDeleteClick()">Delete item</button>
     }
   </li>
