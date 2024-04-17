@@ -11,4 +11,6 @@ export const hotelsFeatureKey = 'hotels';
 export const hotelsReducer = createReducer(
   initialState,
   on(HotelsActions.loadHotels, (_state, payload) => payload.hotels),
+  on(HotelsActions.addHotel, (state, { hotel }) => [...state, hotel]),
+  on(HotelsActions.deleteHotel, (state, { hotelId }) => state.filter(hotel => hotel.id !== hotelId)),
 );

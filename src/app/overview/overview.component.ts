@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HotelsService } from '../services/hotels.service';
 import { HotelWithoutId } from '../models';
 import { RouterLink } from '@angular/router';
@@ -8,6 +8,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { Store } from '@ngrx/store';
 import { selectAllHotels } from '../state/hotels.selectors';
 import { AsyncPipe } from '@angular/common';
+import { HotelsActions } from '../state/hotels.actions';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-overview',
@@ -21,7 +23,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
   hotels$ = this.store.select(selectAllHotels);
 
   addHotelForm = new FormGroup({
@@ -39,7 +41,15 @@ export class OverviewComponent {
     private hotelsService: HotelsService,
     protected keycloak: KeycloakService,
     private store: Store,
+    private actions$: Actions,
   ) {
+  }
+
+  ngOnInit() {
+    this.actions$.pipe(ofType(HotelsActions.addHotel))
+      .subscribe(() => {
+        this.addHotelForm.reset();
+      });
   }
 
   saveHotel() {
@@ -47,16 +57,13 @@ export class OverviewComponent {
       name: this.addHotelForm.value.name ?? '',
       location: this.addHotelForm.value.location ?? '',
     };
-    this.hotelsService.addHotel(newHotel)
-      .subscribe(() => {
-        this.addHotelForm.reset();
-      });
+    this.store.dispatch(HotelsActions.postHotelToService({
+      partialHotel: newHotel,
+    }));
   }
 
-  deleteHotel(id: string) {
-    this.hotelsService.deleteHotel(id)
-      .subscribe(() => {
-      });
+  deleteHotel(hotelId: string) {
+    this.store.dispatch(HotelsActions.deleteHotelToService({ hotelId }));
   }
 }
 

@@ -20,4 +20,22 @@ export class HotelsEffects {
         catchError(() => EMPTY),
       )),
   ));
+
+  addHotel$ = createEffect(() => this.actions$.pipe(
+    ofType(HotelsActions.postHotelToService),
+    exhaustMap(({ partialHotel }) => this.hotelsService.addHotel(partialHotel)
+      .pipe(
+        map(hotel => HotelsActions.addHotel({ hotel })),
+        catchError(() => EMPTY),
+      )),
+  ));
+
+  deleteHotel$ = createEffect(() => this.actions$.pipe(
+    ofType(HotelsActions.deleteHotelToService),
+    exhaustMap(({ hotelId }) => this.hotelsService.deleteHotel(hotelId)
+      .pipe(
+        map(() => HotelsActions.deleteHotel({ hotelId })),
+        catchError(() => EMPTY),
+      )),
+  ));
 }

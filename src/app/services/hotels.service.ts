@@ -24,8 +24,8 @@ export class HotelsService {
       );
   }
 
-  addHotel(hotel: HotelWithoutId): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/hotels`, hotel);
+  addHotel(hotel: HotelWithoutId): Observable<Hotel> {
+    return this.http.post<Hotel>(`${this.apiUrl}/hotels`, hotel);
   }
 
   deleteHotel(id: string): Observable<void> {
