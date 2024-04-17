@@ -1,0 +1,11 @@
+nav a {
+  padding-right: 1em;
+}
+
+.link-like {
+  text-decoration: underline;
+}
+
+.link-like:hover {
+  cursor: pointer;
+}

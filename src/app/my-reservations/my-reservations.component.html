@@ -1,0 +1,10 @@
+<h2>My Reservations</h2>
+
+@for (reservation of reservations; track reservation.id) {
+  <div>Reservation id: {{ reservation.id }}</div>
+  <div>From: {{ reservation.from | date }}</div>
+  <div>To: {{ reservation.to | date }}</div>
+  @if (reservation.comment) {
+    <div>Comment: {{ reservation.comment }}</div>
+  }
+}

@@ -1,9 +1,11 @@
 <h1>Booking Website</h1>
 <nav>
+  <a routerLink="/overview">Overview</a>
+  <a routerLink="/my-reservations">My Reservations</a>
   @if (keycloak.isLoggedIn()) {
-    <a (click)="logout()">Logout</a>
+    <a (click)="logout()" class="link-like">Logout</a>
   } @else {
-    <a (click)="login()">Login</a>
+    <a (click)="login()" class="link-like">Login</a>
   }
 </nav>
 
