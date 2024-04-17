@@ -1,4 +1,4 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createAction, createActionGroup, props } from '@ngrx/store';
 import { Hotel } from '../models';
 
 export const HotelsActions = createActionGroup({
@@ -7,3 +7,5 @@ export const HotelsActions = createActionGroup({
     'Load Hotels': props<{ hotels: Hotel[] }>(),
   },
 });
+
+export const applicationInitialized = createAction('[Application] initialized');

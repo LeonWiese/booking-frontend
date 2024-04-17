@@ -6,6 +6,8 @@ import { initializeKeycloak } from './auth';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { provideStore } from '@ngrx/store';
 import { hotelsFeatureKey, hotelsReducer } from './state/hotels.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { HotelsEffects } from './state/hotels.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +25,8 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       [hotelsFeatureKey]: hotelsReducer,
     }),
+    provideEffects(
+      HotelsEffects,
+    ),
   ],
 };

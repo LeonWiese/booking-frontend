@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { HotelsService } from './services/hotels.service';
 import { Store } from '@ngrx/store';
-import { HotelsActions } from './state/hotels.actions';
+import { applicationInitialized} from './state/hotels.actions';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +15,11 @@ export class AppComponent implements OnInit {
   constructor(
     protected keycloak: KeycloakService,
     private router: Router,
-    private hotelsService: HotelsService,
     private store: Store,
   ) {}
 
   ngOnInit() {
-    this.hotelsService.getHotels()
-      .subscribe(hotels => {
-        this.store.dispatch(HotelsActions.loadHotels({ hotels }));
-      })
+    this.store.dispatch(applicationInitialized());
   }
 
   login() {
