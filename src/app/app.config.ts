@@ -2,8 +2,10 @@ import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angula
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
-import { initializeKeycloak } from './auth/initialize-keycloak';
+import { initializeKeycloak } from './auth';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { provideStore } from '@ngrx/store';
+import { hotelsFeatureKey, hotelsReducer } from './state/hotels.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +20,8 @@ export const appConfig: ApplicationConfig = {
       multi: true,
       deps: [KeycloakService],
     },
+    provideStore({
+      [hotelsFeatureKey]: hotelsReducer,
+    }),
   ],
 };

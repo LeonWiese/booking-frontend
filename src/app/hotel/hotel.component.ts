@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from '../models';
-import { Location, UpperCasePipe } from '@angular/common';
-import { HotelsService } from '../services/hotels.service';
+import { AsyncPipe, Location, UpperCasePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectHotel } from '../state/hotels.selectors';
 
 @Component({
   selector: 'app-hotel',
   standalone: true,
   imports: [
     UpperCasePipe,
+    AsyncPipe,
   ],
   templateUrl: './hotel.component.html',
   styleUrl: './hotel.component.css',
 })
 export class HotelComponent implements OnInit {
-  hotel?: Hotel;
+  hotel$ = new Observable<Hotel | undefined>();
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private hotelService: HotelsService,
+    private store: Store,
   ) {
   }
 
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('id');
     if (hotelId) {
-      this.getHotel(hotelId);
+      this.hotel$ = this.store.select(selectHotel(hotelId));
     }
-  }
-
-  getHotel(hotelId: string) {
-    this.hotelService.getHotel(hotelId)
-      .subscribe(hotel => {
-        this.hotel = hotel;
-      });
   }
 
   back() {

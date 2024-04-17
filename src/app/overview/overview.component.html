@@ -28,7 +28,7 @@
 }
 
 <ul class="hotels">
-  @for (hotel of hotels; track hotel.id) {
+  @for (hotel of hotels$ | async; track hotel.id) {
     <app-list-item [hotel]="hotel" (delete)="deleteHotel($event)"/>
   }
 </ul>

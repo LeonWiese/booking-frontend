@@ -1,6 +1,6 @@
 <button (click)="back()">back</button>
 
-@if (hotel) {
+@if (hotel$ | async; as hotel) {
   <h2>{{ hotel.name | uppercase }} Details</h2>
   <div><span>id: </span> {{ hotel.id }}</div>
   <div><span>name: </span> {{ hotel.name }}</div>
